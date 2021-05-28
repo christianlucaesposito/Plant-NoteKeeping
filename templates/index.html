@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %} 
+<div class="content"> 
+    <h1 style="text-align: center">🌱 Plant NoteKeeping</h1>
+    <h5 style="text-align: center"> Add plants and keep track when they have been watered!</h5>
+    {% if notes|length < 1 %}
+    <h4 style="text-align: center">There are no plants. Add a plant below! 👇 </h4>
+    {% else %}
+    <table border=1>
+        <tr>
+            <th>Plant Name</th>
+            <th>Last Watered</th>
+            <th>Actions</th>
+        </tr>
+        {% for note in notes %}
+            <tr>
+                <td>{{ note.plant_name }}</td>
+                <td>{{ note.date_watered.date() }}</td>
+                <td>
+                    <a href="/delete/{{note.id}}" title="deletes this plant note">Delete</a>
+                    <br>
+                    <a href="/update/{{note.id}}" title="updates watered date to today">Update</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <div class="form">
+        <form action='/' method="POST">
+            <input type="text" name="plant_name" id="plant_name">
+            <input type="submit" value="Add New Plant Watered Today">
+        </form>
+    </div>
+    {% if error_msg|length %}
+    <h5 class="error_msg" style="text-align: center"> {{error_msg}} </h5>
+    {% endif %}
+</div>
+{% endblock %}
