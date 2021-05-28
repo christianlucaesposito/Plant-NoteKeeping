@@ -1,7 +1,7 @@
 # Plant-NoteKeeping
 Organizer to keep track when plants were last watered!
 
-## An aquarium simulator
+## Keep track when your plants have been watered!
 
 Why I made this app?
 I made this app because I never knew where to keep track of my plants water schedule. 
