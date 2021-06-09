@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///plant.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 db = SQLAlchemy(app)
 
 # NoteKeeping database, contains a three columns id (primary key), plant_name and date watered
@@ -64,4 +64,8 @@ def update(id):
 
 
 if __name__ == "__main__":
+    try:
+        db.create_all()
+    except Exception as e:
+        print('Could not create new database.' + str(e))
     app.run(debug=True)
